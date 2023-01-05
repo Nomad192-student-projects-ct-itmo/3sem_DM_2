@@ -189,6 +189,17 @@ TEST(correctness, 13)
             6, 100,
     };
 
+    std::string input = R"INPUT(
+            6
+            1 1
+            5 3
+            5 3
+            5 3
+            5 3
+            6 100
+            )INPUT";
+
+
     ASSERT_EQ(0, a_work(array[0], array + 1));
 }
 

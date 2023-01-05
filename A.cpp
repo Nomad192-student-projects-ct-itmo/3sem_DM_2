@@ -63,6 +63,13 @@ unsigned long long a_work(size_t n, uint *array) {
 
 #include <fstream>
 
+template<typename T>
+T read_const(std::istream& in) {
+    T t;
+    in >> t;
+    return t;
+}
+
 int main() {
     std::ifstream in_file;
     std::ofstream out_file;
@@ -75,7 +82,8 @@ int main() {
     std::ostream &out = out_file;         /// = std::cout
     ///==================================================///
 
-    const auto n = [&in](size_t t) { return in >> t, std::move(t); }({});
+    //const auto n = [&in](size_t t) { return in >> t, std::move(t); }({});
+    const auto n = read_const<size_t>(in);
 
     uint *array = new uint[2 * n];
 
