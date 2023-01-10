@@ -1,10 +1,10 @@
 #include <iostream>
 #include <set>
 
-typedef unsigned long long uint;
+typedef unsigned long long val_type;
 
 struct queue_t {
-    uint n = 0;
+    val_type n = 0;
     unsigned long long fine = 0;
     std::set<size_t> available_seats;
 
@@ -13,7 +13,7 @@ struct queue_t {
             available_seats.insert(i);
     }
 
-    void add(uint d, uint w) {
+    void add(val_type d, val_type w) {
         if (d == 0)
             fine += w;
         else if (d < n) {
@@ -28,7 +28,7 @@ struct queue_t {
     }
 };
 
-using task_t = std::pair<uint, uint>;
+using task_t = std::pair<val_type, val_type>;
 struct task_comparator_t
 {
     bool operator() (task_t const &one, task_t const &two)
@@ -37,9 +37,9 @@ struct task_comparator_t
     }
 };
 
-unsigned long long a_work(size_t n, uint *array) {
+unsigned long long a_work(size_t n, val_type *array) {
     std::multiset<task_t, task_comparator_t> sort_array;
-    uint max_d = array[0];
+    val_type max_d = array[0];
     for (size_t i = 0; i < n; i++)
     {
         if (array[(2 * i) + 1] != 0)
@@ -67,7 +67,7 @@ template<typename T>
 T read_const(std::istream& in) {
     T t;
     in >> t;
-    return t;
+    return std::move(t);
 }
 
 int main() {
@@ -85,7 +85,7 @@ int main() {
     //const auto n = [&in](size_t t) { return in >> t, std::move(t); }({});
     const auto n = read_const<size_t>(in);
 
-    uint *array = new uint[2 * n];
+    val_type *array = new val_type[2 * n];
 
     for (size_t i = 0; i < 2 * n; i++)
         in >> array[i];
